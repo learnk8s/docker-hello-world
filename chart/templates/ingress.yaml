@@ -1,13 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: kube-hello-world-ingress
+  name: {{ template "name" . }}
 spec:
   rules:
-  - http:
+  - host: {{ .Release.Name }}.hello-world.dev
+    http:
       paths:
-      - backend:
-          serviceName: kube-hello-world-service
+      - path: /
+        backend:
+          serviceName: {{ template "name" . }}
           servicePort: 80
-        path: /
 

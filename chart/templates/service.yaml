@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: kube-hello-world-service
-  name: kube-hello-world-service
+    name: {{ template "name" . }}
+  name: {{ template "name" . }}
 spec:
   ports:
   - name: exposed-port
     port: 80
     targetPort: 8080
   selector:
-    name: kube-hello-world
+    name: {{ template "name" . }}

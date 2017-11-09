@@ -1,17 +1,25 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kube-hello-world
+  name: {{ template "name" . }}
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
-        name: kube-hello-world
+        name: {{ template "name" . }}
+      annotations:
+        checksum: {{ include (print $.Chart.Name "/templates/configmap.yaml") . | sha256sum }}
     spec:
       containers:
       - name: hello-world-nodejs
-        image: first-container
+        image: {{ .Values.image }}
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8080
+        env:
+          - name: VERSION
+            valueFrom:
+              configMapKeyRef:
+                  name: {{ template "name" . }}
+                  key: version
