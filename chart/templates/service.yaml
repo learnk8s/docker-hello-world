@@ -6,8 +6,8 @@ metadata:
   name: {{ template "name" . }}
 spec:
   ports:
-  - name: exposed-port
-    port: 80
+  - port: 80
     targetPort: 8080
   selector:
     name: {{ template "name" . }}
+  type: NodePort

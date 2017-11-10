@@ -4,10 +4,9 @@ metadata:
   name: {{ template "name" . }}
 spec:
   rules:
-  - host: {{ .Release.Name }}.hello-world.dev
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /*
         backend:
           serviceName: {{ template "name" . }}
           servicePort: 80
