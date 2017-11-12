@@ -3,11 +3,7 @@ kind: Ingress
 metadata:
   name: {{ template "name" . }}
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: {{ template "name" . }}
-          servicePort: 80
+  backend:
+    serviceName: {{ template "name" . }}
+    servicePort: 80
 
