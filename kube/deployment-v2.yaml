@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworld
+        version: v2
+    spec:
+      containers:
+      - name: web
+        image: learnk8s/demo:2.0.0
+        ports:
+          - containerPort: 3000
+        livenessProbe:
+          initialDelaySeconds: 2
+          periodSeconds: 5
+          httpGet:
+            path: /healthz
+            port: 3000
+      - name: redis
+        image: redis:4.0.2-alpine
+        ports:
+          - containerPort: 6379

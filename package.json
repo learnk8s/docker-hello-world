@@ -6,7 +6,8 @@
   "author": "<hello@learnk8s.io>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "ioredis": "^3.2.1"
   },
   "scripts": {
     "test": "node test.js",
